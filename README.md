@@ -16,9 +16,13 @@ npm run dev
 
 Requires Node 18+. Deployed on Vercel (team **Quickly Media**, project
 `lift-level-landing`) — production is
-**https://estimate.liftandlevelconcrete.com**. Pushing to this repo does not
-deploy: the project is currently deployed via the Vercel CLI, so either run
-`vercel --prod` or connect this repo in the Vercel dashboard for auto-deploys.
+**https://estimate.liftandlevelconcrete.com**.
+
+**This repo auto-deploys.** Pushing to `main` builds and ships to production;
+any other branch or PR gets its own preview URL. Work on a branch and open a
+PR — a push straight to `main` goes live on the client's ad campaign
+immediately. Environment variables live in the Vercel project (not in the
+repo), so previews and production both pick them up automatically.
 
 ## Source assets (not in this repo)
 
