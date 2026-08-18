@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+.env*.local
+.env
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+
+# Source materials (205MB of raw video + original AI PNGs). The optimized
+# versions the site actually serves live in /public and ARE tracked.
+# Originals are kept outside the repo — see README "Source assets".
+assets/

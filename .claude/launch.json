@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "lift-level-landing",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "/Users/juanestebanboterof/Downloads/lift-level-landing",
+      "port": 3000
+    }
+  ]
+}

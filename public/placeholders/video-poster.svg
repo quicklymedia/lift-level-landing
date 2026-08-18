@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#ECEEF0"/>
+  <rect x="2" y="2" width="1276" height="716" fill="none" stroke="#C3C9CE" stroke-width="4" stroke-dasharray="16 12"/>
+  <circle cx="640" cy="340" r="70" fill="#DDE1E4" stroke="#6B7680" stroke-width="4"/>
+  <polygon points="618,305 618,375 685,340" fill="#6B7680"/>
+  <text x="640" y="470" font-family="system-ui, sans-serif" font-size="34" fill="#6B7680" text-anchor="middle">Video poster placeholder — 45s lifting process</text>
+</svg>
