@@ -92,6 +92,34 @@ landing URL into hidden fields automatically.
 | `form_submit` | Form successfully delivered | Fires right before redirect to `/thankyou`. Includes `service` |
 | `call_click` | Any `tel:` link clicked | Includes `link_location`: `header` / `hero` / `sticky_bar` / `footer` / `thankyou` |
 
+**Call tracking (Google Ads):** two conversion actions, both live.
+
+| Action | Where it's configured |
+|---|---|
+| *Calls from ads* (call assets / call-only ads) | Ads account only — no code |
+| *Calls from website* | `app/layout.tsx` + `CALL_CONVERSION_SEND_TO` in `lib/constants.ts` |
+
+Both use: Phone call lead category, Primary, 60-second minimum, count **One**,
+value $1 USD, 30-day window, data-driven attribution.
+
+For *calls from website*, `gtag('config', 'AW-18371630260/WjzmCOmq0ukcELSpo7hE',
+{phone_conversion_number})` swaps a Google forwarding number in for the real
+number — **only for visitors who arrived from an ad click**; organic traffic
+keeps seeing `(404) 500-7450`. The config sits in the SAME inline script as the
+base `gtag('config', ADS_ID)` on purpose: split into its own `<Script>` it can
+run before `gtag()` exists and the swap silently no-ops.
+
+⚠️ `phone_conversion_number` must match the number **as rendered**, character
+for character, so it's derived from `formatPhone(business.phoneDigits)` rather
+than hardcoded — changing `NEXT_PUBLIC_PHONE_NUMBER` can't silently break it.
+
+To verify after deploy: load the site with `?gclid=test123`, hard refresh, and
+confirm the displayed number becomes an 8xx forwarding number. Google also
+rewrites matching `tel:` hrefs, which covers the two CTAs with no visible
+number — the mobile sticky bar's "Call Now" (`components/StickyBar.tsx`) and
+the mobile header's icon-only button (`components/Header.tsx`). Spot-check both
+on a phone: right number in the dialer, not just on screen.
+
 **Google Ads conversion:** fires on `/thankyou` load
 (`components/ThankYouConversion.tsx` →
 `gtag('event','conversion',{send_to:'AW-18371630260/UUqaCOzUlNwcELSpo7hE'})`).
@@ -135,8 +163,10 @@ restore the checkbox and re-register A2P with web-form opt-in.
 
 1. **GHL webhook URL / API token** — set in Vercel env vars; send a test lead
    and confirm it lands in the right pipeline.
-2. **Call-tracking phone number** — until then, click-to-call conversions are
-   invisible to Ads optimization (risk accepted).
+2. **Call-tracking phone number** — the real line `(404) 500-7450` is still the
+   one on the page. Google's forwarding number now swaps in for ad clicks (see
+   *Call tracking* above), so click-to-call is measured; a dedicated
+   call-tracking line is no longer blocking.
 3. **Replace AI before/after images with real project photos** — the current
    5 pairs in `public/before-after/` are AI-generated (Gemini) same-scene
    simulations, approved as unlabeled placeholders for preview only.

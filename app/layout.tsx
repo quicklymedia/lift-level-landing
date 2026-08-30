@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { business, formatPhone } from "@/lib/content";
+import { CALL_CONVERSION_SEND_TO } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Concrete Leveling Atlanta | Lift + Level Concrete — Free Estimates",
@@ -19,6 +20,13 @@ export const viewport: Viewport = {
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 // Google Ads tag (gtag.js). Public ID, safe in source; env var allows override.
 const ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "AW-18371630260";
+/**
+ * Number Google's call-tracking swaps out. It must match the number as
+ * RENDERED on the page character for character, so it is derived from the same
+ * formatPhone() every visible number uses — swapping NEXT_PUBLIC_PHONE_NUMBER
+ * (e.g. when the call-tracking line arrives) can't silently break the swap.
+ */
+const CALL_DISPLAY_NUMBER = formatPhone(business.phoneDigits);
 
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -44,7 +52,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* Google tag (gtag.js) — Google Ads AW-18371630260 */}
+        {/* Google tag (gtag.js) — Google Ads AW-18371630260.
+            The call-tracking config lives in the SAME inline block as the base
+            config, not in a <Script> of its own: the swap silently no-ops if it
+            runs before gtag() is defined, and one block makes that impossible. */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`}
           strategy="afterInteractive"
@@ -53,7 +64,8 @@ export default function RootLayout({
           {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${ADS_ID}');`}
+gtag('config', '${ADS_ID}');
+gtag('config', '${CALL_CONVERSION_SEND_TO}', {'phone_conversion_number': '${CALL_DISPLAY_NUMBER}'});`}
         </Script>
         {GTM_ID ? (
           <>

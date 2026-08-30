@@ -43,3 +43,15 @@ export const GTM_EVENTS = {
  * truth for Ads.
  */
 export const ADS_CONVERSION_SEND_TO = "AW-18371630260/UUqaCOzUlNwcELSpo7hE";
+
+/**
+ * Google Ads conversion (calls from website). Not fired as an event — this is
+ * the number-swap config: gtag replaces the displayed number and the tel:
+ * hrefs with a Google forwarding number for visitors who arrived from an ad
+ * click, and the call itself is what converts (60s minimum, counted in Ads).
+ * Organic visitors keep seeing the real number.
+ *
+ * "Calls from ads" (call assets / call-only ads) needs no code — it's
+ * configured account-side in Ads and is already live.
+ */
+export const CALL_CONVERSION_SEND_TO = "AW-18371630260/WjzmCOmq0ukcELSpo7hE";
