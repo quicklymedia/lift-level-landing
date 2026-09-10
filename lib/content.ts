@@ -69,6 +69,13 @@ export type ServiceSlug =
 
 export interface HeroContent {
   h1: string;
+  /**
+   * Substring of `h1` painted in accent-400. Every headline here is built the
+   * same way — name the outcome, then kill the feared alternative — so the
+   * emphasis is always that second half. Must appear in `h1` verbatim or the
+   * headline simply renders flat (no crash, no partial match).
+   */
+  emphasis?: string;
   subheadline: string;
   /** Full-bleed hero background image. */
   imageSrc: string;
@@ -102,6 +109,7 @@ const DEFAULT_HERO_ALT =
  */
 export const defaultHero: HeroContent = {
   h1: "Lift Your Concrete Without Replacement",
+  emphasis: "Without Replacement",
   subheadline: heroSubheadline,
   imageSrc: DEFAULT_HERO_IMAGE,
   imageAlt: DEFAULT_HERO_ALT,
@@ -110,42 +118,49 @@ export const defaultHero: HeroContent = {
 export const heroByService: Record<ServiceSlug, HeroContent> = {
   driveway: {
     h1: "Lift Your Sunken Driveway — Without Replacing It",
+    emphasis: "Without Replacing It",
     subheadline: heroSubheadline,
     imageSrc: DEFAULT_HERO_IMAGE,
     imageAlt: DEFAULT_HERO_ALT,
   },
   sidewalk: {
     h1: "Fix Uneven Sidewalks & Walkways in Hours",
+    emphasis: "in Hours",
     subheadline: heroSubheadline,
     imageSrc: DEFAULT_HERO_IMAGE,
     imageAlt: DEFAULT_HERO_ALT,
   },
   patio: {
     h1: "Level Your Sunken Patio — No Demolition",
+    emphasis: "No Demolition",
     subheadline: heroSubheadline,
     imageSrc: DEFAULT_HERO_IMAGE,
     imageAlt: DEFAULT_HERO_ALT,
   },
   "pool-deck": {
     h1: "Lift Your Pool Deck Back to Level",
+    emphasis: "Back to Level",
     subheadline: heroSubheadline,
     imageSrc: DEFAULT_HERO_IMAGE,
     imageAlt: DEFAULT_HERO_ALT,
   },
   garage: {
     h1: "Level Your Garage Floor — Without Tearing It Out",
+    emphasis: "Without Tearing It Out",
     subheadline: heroSubheadline,
     imageSrc: DEFAULT_HERO_IMAGE,
     imageAlt: DEFAULT_HERO_ALT,
   },
   foundation: {
     h1: "Stabilize & Lift Settled Foundations",
+    emphasis: "Settled Foundations",
     subheadline: heroSubheadline,
     imageSrc: DEFAULT_HERO_IMAGE,
     imageAlt: DEFAULT_HERO_ALT,
   },
   "void-filling": {
     h1: "Fill Voids & Stop Erosion Under Your Concrete",
+    emphasis: "Stop Erosion",
     subheadline: heroSubheadline,
     imageSrc: DEFAULT_HERO_IMAGE,
     imageAlt: DEFAULT_HERO_ALT,

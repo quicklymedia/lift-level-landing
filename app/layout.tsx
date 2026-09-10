@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 import { business, formatPhone } from "@/lib/content";
 import { CALL_CONVERSION_SEND_TO } from "@/lib/constants";
@@ -16,6 +17,20 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
+
+/**
+ * Display face for headlines. next/font self-hosts it and inlines the @font-face
+ * at build time — no request to fonts.googleapis.com, no render-blocking CSS and
+ * no FOUT, which matters on a paid landing where mobile is 87% of clicks.
+ * Archivo is a sturdy grotesque that matches the wordmark; body copy stays on
+ * the system stack, which is already fast and legible.
+ */
+const display = Archivo({
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 // Google Ads tag (gtag.js). Public ID, safe in source; env var allows override.
@@ -50,7 +65,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={display.variable}>
       <body>
         {/* Google tag (gtag.js) — Google Ads AW-18371630260.
             The call-tracking config lives in the SAME inline block as the base

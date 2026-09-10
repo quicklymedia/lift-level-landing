@@ -8,6 +8,8 @@ import type { Config } from "tailwindcss";
  *  - white on navy-800 (#16324F): 11.2:1
  *  - accent-700 (#B9400B) on white: 5.6:1  (link/text use)
  *  - white on accent-600 (#C2410C): 4.6:1  (buttons)
+ *  - accent-400 (#FB923C) on navy-800: 5.8:1  (headline emphasis on navy —
+ *    accent-600 is far too dark to sit on navy, hence the separate token)
  */
 const config: Config = {
   content: [
@@ -25,6 +27,7 @@ const config: Config = {
           900: "#102540",
         },
         accent: {
+          400: "#FB923C",
           600: "#C2410C",
           700: "#B9400B",
           800: "#9A3412",
@@ -36,6 +39,18 @@ const config: Config = {
           300: "#C3C9CE",
           500: "#6B7680",
         },
+      },
+      fontFamily: {
+        // Headlines only. Falls back to the system stack before the face loads.
+        display: [
+          "var(--font-display)",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+        ],
       },
       maxWidth: {
         content: "72rem",
