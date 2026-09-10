@@ -98,11 +98,16 @@ gtag('config', '${CALL_CONVERSION_SEND_TO}', {'phone_conversion_number': '${CALL
           data-source="WEB_USER"
           strategy="lazyOnload"
         />
-        {/* The widget renders in an open shadow root, unreachable from page CSS.
-            On mobile its bubble (bottom:20px) covers the sticky CTA bar, so we
-            inject a style INTO the shadow root lifting it above the bar. */}
+        {/* The widget renders in an open shadow root, unreachable from page CSS,
+            so we inject a style INTO the shadow root. Two mobile fixes:
+            1. its bubble (bottom:20px) covers the sticky CTA bar — lift it.
+            2. the auto-opening greeting (.lc_text-widget--prompt) is fixed
+               position and sat on top of whatever was behind it: the hero
+               subheadline on load, and the lead form's EMAIL FIELD once
+               scrolled down. Hidden under 768px; the bubble stays tappable,
+               so chat is still one tap away for anyone who wants it. */}
         <Script id="chat-widget-offset" strategy="lazyOnload">
-          {`(function(){var tries=0;var t=setInterval(function(){var w=document.querySelector('chat-widget');if(w&&w.shadowRoot){var s=document.createElement('style');s.textContent='@media (max-width:767px){.lc_text-widget,.lc_text-widget--bubble{bottom:88px !important;}}';w.shadowRoot.appendChild(s);clearInterval(t);}else if(++tries>120){clearInterval(t);}},500);})();`}
+          {`(function(){var tries=0;var t=setInterval(function(){var w=document.querySelector('chat-widget');if(w&&w.shadowRoot){var s=document.createElement('style');s.textContent='@media (max-width:767px){.lc_text-widget,.lc_text-widget--bubble{bottom:88px !important;}.lc_text-widget--prompt{display:none !important;}}';w.shadowRoot.appendChild(s);clearInterval(t);}else if(++tries>120){clearInterval(t);}},500);})();`}
         </Script>
         {children}
       </body>
