@@ -42,9 +42,12 @@ export default function Hero({ service }: { service?: string }) {
 
         {/* LCP element: priority, no lazy loading. Aspect ratio is reserved by the
             wrapper so the image swap can never cause layout shift.
-            order-first: on mobile the photo sits ABOVE the headline; on md+ it
-            returns to the right-hand column. */}
-        <div className="relative order-first aspect-[4/3] w-full overflow-hidden rounded-xl md:order-none">
+            The photo deliberately follows the copy on mobile. It used to be
+            order-first, which filled ~520px of an 812px screen and pushed the
+            H1, the value prop AND both CTAs below the fold — visitors landed on
+            a photo with no offer attached. On md+ the two-column grid puts it
+            in the right-hand column regardless of source order. */}
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
           <Image
             src={hero.imageSrc}
             alt={hero.imageAlt}
