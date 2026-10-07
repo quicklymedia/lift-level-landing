@@ -112,3 +112,38 @@
     box-shadow: 0 0 30px 7px rgb(194 65 12 / 0.4);
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* V2 redesign (/v2)                                                          */
+/* -------------------------------------------------------------------------- */
+
+/* Shared sections (video, comparison, FAQ…) get v2's display headings so the
+   reused components match the new type system without being forked. */
+.v2 main section h2 {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* Ticker: list rendered twice, track slides -50% for a seamless loop. */
+@keyframes v2-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: v2-ticker 38s linear infinite;
+}
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* 3-step truck driving the progress line. Under reduced motion the global
+   rule collapses this to its end state (truck parked at step 3). */
+@keyframes v2-truck {
+  from { left: 0; }
+  to { left: calc(100% - 4rem); }
+}
+.steps-truck {
+  animation: v2-truck 7s ease-in-out infinite alternate;
+}
