@@ -139,6 +139,30 @@ not in this repo:
 `form_start`/`form_submit` dataLayer events no longer fire (iframe), and the
 `?service=` param no longer pre-selects the service inside the GHL form.
 
+## Redesign preview (`/v2`)
+
+A client-requested redesign (Floor Daddy–style: full-bleed photo hero, ticker,
+"Included with every lift", yellow offer band, photo service cards) lives at
+**`/v2`** on the production domain, so the client can see it without Vercel
+login. It is `noindex` and nothing links to it; `/` is unchanged and still
+receives all Ads traffic.
+
+- Route: `app/v2/page.tsx`. New sections: `components/v2/`. Copy: `lib/content-v2.ts`
+  (shared facts — phone, services, steps, FAQ, reviews — still come from `lib/content.ts`).
+- The form, `TelLink`, sticky bar, footer, chat widget and Ads tags are the
+  **same components** as `/`, so leads, call tracking and `/thankyou`
+  conversions behave identically.
+- **Photos in `public/v2/` are AI-generated demos** (Gemini), including the
+  before/after pairs. Swap them for real job photos before running ads to
+  `/v2` — keep the same filenames, or edit `v2Images`, `beforeAfterV2` and
+  `serviceImages` in `lib/content-v2.ts`.
+- `heroV2.googleRating` is `null` on purpose: set it only with the real Google
+  score and count.
+
+**To promote v2 to the main page** (after client approval): make
+`app/page.tsx` render the v2 page (e.g. `export { default } from "./v2/page"`
+plus its `metadata` without the `robots` noindex), then delete or redirect `/v2`.
+
 ## Swapping placeholders
 
 All visuals are labeled gray blocks (`components/Placeholder.tsx`) with reserved
