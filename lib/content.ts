@@ -461,7 +461,7 @@ export const faqs = [
   },
   {
     q: "Do you offer a warranty?",
-    a: "Yes — our work is backed by a workmanship warranty. We'll walk you through the exact terms with your free estimate. [Confirm warranty terms with client before go-live.]",
+    a: "Yes — our work is backed by a workmanship warranty. We'll walk you through the exact terms with your free estimate.",
   },
   {
     q: "What can and can't be lifted?",
