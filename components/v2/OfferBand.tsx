@@ -13,11 +13,16 @@ export default function OfferBand() {
       <div className="mx-auto max-w-content px-4 py-16 md:py-20">
         <h2
           id="offer-h2"
-          className="text-center font-display text-3xl font-black uppercase leading-[1.05] tracking-tight text-navy-900 sm:text-5xl lg:text-6xl"
+          className="text-center font-display text-[1.75rem] font-black uppercase leading-[1.05] tracking-tight text-navy-900 sm:text-5xl lg:text-6xl xl:whitespace-nowrap xl:text-[3.375rem]"
         >
+          {/* Stacked below xl, one "A | B | C" line from xl up (54px is the
+              largest size that fits the 1120px container). Inline at smaller
+              widths it was one unbreakable ~600px line that pushed the page
+              wider than the phone (sideways scroll + zoomed-out page). */}
           {offerBand.beats.map((beat, i) => (
-            <span key={beat}>
-              {i > 0 ? <span aria-hidden="true" className="mx-2 text-accent-600 sm:mx-3">|</span> : null}
+            <span key={beat} className="block xl:inline">
+              {i > 0 ? " " : null}
+              {i > 0 ? <span aria-hidden="true" className="mx-3 hidden text-accent-600 xl:inline">|</span> : null}
               <span className="whitespace-nowrap">{beat}</span>
             </span>
           ))}
