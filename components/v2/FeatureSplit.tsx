@@ -32,7 +32,7 @@ export default function FeatureSplit() {
 
         <div className="relative">
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
-            <Image src={v2Images.crew.src} alt={v2Images.crew.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+            <Image src={v2Images.rig.src} alt={v2Images.rig.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
           </div>
           {/* Sticker — Floor Daddy's "FREE Air Duct Cleaning" overlay. */}
           <div

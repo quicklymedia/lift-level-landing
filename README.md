@@ -152,10 +152,14 @@ ticker, "Included with every lift", yellow offer band, photo service cards)
   **same components** as the previous design, so leads, call tracking and
   `/thankyou` conversions are unchanged. `?service=` message match now lives
   in the hero eyebrow + footnote.
-- **Photos in `public/v2/` are AI-generated demos** (Gemini), including the
-  before/after pairs. Swap them for real job photos — keep the same
-  filenames, or edit `v2Images`, `beforeAfterV2` and `serviceImages` in
-  `lib/content-v2.ts`.
+- **Photos:** the hero, the "why foam" photo and two offer-band cards
+  (`public/v2/job-*.webp`) are the **client's real job photos** (Nov 2026;
+  the AI-generated technician was removed at the client's request). The
+  before/after pairs and service cards (`ba-*`, `service-*`) are still
+  **AI-generated demos** (Gemini) — swap them for real job photos by keeping
+  the same filenames, or edit `beforeAfterV2` and `serviceImages` in
+  `lib/content-v2.ts`. Strip EXIF/GPS from client photos before committing
+  (they carry customers' home locations).
 - `heroV2.googleRating` is `null` on purpose: set it only with the real Google
   score and count.
 - **Rollback:** the previous design's sections are still in `components/`;
