@@ -24,17 +24,17 @@ export const savingsShort = usingProvisionalClaim
   : "A fraction of the cost";
 
 /* -------------------------------------------------------------------------- */
-/* Images (AI-generated with Gemini for the client demo — swap for real jobs) */
+/* Images — the client's own job photos (Nov 2026; replaced the AI person)   */
 /* -------------------------------------------------------------------------- */
 
 export const v2Images = {
   hero: {
-    src: "/v2/hero.webp",
-    alt: "A Lift + Level technician injecting polyurethane foam into a sunken driveway slab at a brick ranch home in Atlanta, with the company truck behind him.",
+    src: "/v2/job-hero.webp",
+    alt: "A Lift + Level technician injecting polyurethane foam through a small port in a sunken pool deck in metro Atlanta.",
   },
-  crew: {
-    src: "/v2/crew.webp",
-    alt: "A smiling Lift + Level technician holding a foam injection gun on a freshly leveled Atlanta driveway.",
+  rig: {
+    src: "/v2/job-rig.webp",
+    alt: "The Graco foam injection rig and polyurethane drums inside the Lift + Level trailer.",
   },
 } as const;
 
@@ -133,12 +133,12 @@ export const offerBand = {
     {
       title: "Ready in hours",
       text: "Most jobs are done in a few hours. Park on it tonight.",
-      image: { src: "/v2/crew.webp", alt: "A Lift + Level technician on a finished driveway." },
+      image: { src: "/v2/job-trailer.webp", alt: "The Lift + Level Concrete trailer parked at a customer's home in Atlanta." },
     },
     {
       title: "No demolition",
       text: "Dime-sized holes instead of jackhammers and dumpsters.",
-      image: { src: "/v2/hero.webp", alt: "Foam being injected through a small hole in a concrete slab." },
+      image: { src: "/v2/job-ports.webp", alt: "Small injection ports in a front walkway next to the foam injection gun — no jackhammers." },
     },
   ],
 };
